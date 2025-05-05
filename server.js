@@ -69,6 +69,17 @@ app.post("/jobs", async (req, res) => {
     }
 })
 
+app.delete("/jobs/:id", async (req, res) => {
+    try {
+        const jobId = req.params.id;
+        let result = await Job.deleteOne({_id:jobId});
+        return res.json(result);
+    } catch(error) {
+        return res.status(500).json(error);
+    }
+    })
+  
+
 app.listen(port, ()=> {
     console.log ("Servern är igång på port: " + port)
 });
