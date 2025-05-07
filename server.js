@@ -69,6 +69,18 @@ app.post("/jobs", async (req, res) => {
     }
 })
 
+app.put("/jobs/:id", async (req, res) => {
+    try {
+    const jobId = req.params.id;
+    let title = req.body.title;
+
+    let result = await Job.findByIdAndUpdate({_id:jobId}, {$set: { title: title }});
+    return res.json(result);
+    } catch(error) {
+        return res.status(500).json(error);
+    }
+})
+
 app.delete("/jobs/:id", async (req, res) => {
     try {
         const jobId = req.params.id;
